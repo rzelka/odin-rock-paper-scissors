@@ -8,16 +8,24 @@ function computerPlay() {
     return choice[Math.floor(Math.random() * choice.length)]
 }
 
-//define player selection --> repair infinte loop, cant access cancel button
+//define player selection
 
 function userPlay() {
-    let input = prompt('Choose your weapon: rock, paper or scissors!').toLowerCase();
+    let input = prompt('Choose your weapon: rock, paper or scissors!');
     
-    if (input === 'rock' || input === 'paper' || input === 'scissors') {
-       return input;
+    if (input === null) {
+        return 'escape';
+    } else if (input.toLowerCase() === 'rock' || input.toLowerCase() === 'paper' || input.toLowerCase() === 'scissors') {
+       return input.toLowerCase();
     } else {
-        do input = prompt('Can\'t do that. Choose between available weapons.').toLowerCase();
-        while (input !== 'rock' & input !== 'paper' & input !== 'scissors')}
+        do {
+            input = prompt('Can\'t do that. Choose between available weapons (rock, paper, scissors).');
+            if (input === null) {
+                return 'escape';
+            } else if (input.toLowerCase() === 'rock' || input.toLowerCase() === 'paper' || input.toLowerCase() === 'scissors') {
+                return input.toLowerCase();  
+            }}
+        while (input === '' || input.toLowerCase() !== 'rock' || input.toLowerCase() !== 'paper' || input.toLowerCase() !== 'scissors')}
 }
 //define players move
 
@@ -35,6 +43,8 @@ function playRound(playerSelection, computerSelection) {
     playerSelection === 'paper' && computerSelection === 'rock'||
     playerSelection === 'scissors' && computerSelection === 'paper') {
     return ('You won!')
+    } else if (playerSelection === 'escape') {
+    return ('You escaped the battle!')
     } else {
     return ('You lost!')
     }
@@ -42,6 +52,6 @@ function playRound(playerSelection, computerSelection) {
 
 //show results
 
-console.log(computerSelection)
-console.log(playerSelection)
+console.log("Computer pick: " + computerSelection);
+console.log("Player pick: " + playerSelection);
 console.log(playRound(playerSelection, computerSelection));
